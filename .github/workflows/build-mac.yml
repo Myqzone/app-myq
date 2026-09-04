@@ -34,7 +34,8 @@ jobs:
       - name: Build macOS DMG Package
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: false
-        run: npm run build:mac
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run build:mac -- --publish never
 
       - name: Upload macOS DMG Artifact
         uses: actions/upload-artifact@v4
@@ -64,7 +65,9 @@ jobs:
         run: npm install
 
       - name: Build Windows Setup Installer
-        run: npm run build:exe
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run build:exe -- --publish never
 
       - name: Upload Windows EXE Artifact
         uses: actions/upload-artifact@v4

@@ -1,17 +1,18 @@
 {
   "name": "app-myq",
   "version": "1.0.0",
-  "description": "",
+  "description": "Minimalist Media Studio & Adobe Downgrader",
+  "author": "MyQ",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "desktop": "electron .",
     "web": "node server.js",
-    "dist": "electron-builder --win",
-    "build:exe": "electron-builder --win",
-    "build:portable": "electron-builder --win portable",
-    "build:mac": "electron-builder --mac dmg",
-    "build:all": "electron-builder -mw"
+    "dist": "electron-builder --win -p never",
+    "build:exe": "electron-builder --win -p never",
+    "build:portable": "electron-builder --win portable -p never",
+    "build:mac": "electron-builder --mac dmg -p never",
+    "build:all": "electron-builder -mw -p never"
   },
   "build": {
     "appId": "com.appmyq.media",

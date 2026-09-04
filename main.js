@@ -49,7 +49,7 @@ function createWindow() {
     minWidth: 1040,
     minHeight: 720,
     backgroundColor: '#09090b',
-    icon: path.join(__dirname, 'build', 'icon.ico'),
+    icon: path.join(__dirname, 'build', process.platform === 'win32' ? 'icon.ico' : 'icon.png'),
     frame: true,
     titleBarStyle: 'default',
     autoHideMenuBar: true,
