@@ -1,0 +1,100 @@
+{
+  "name": "app-myq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "desktop": "electron .",
+    "web": "node server.js",
+    "dist": "electron-builder --win",
+    "build:exe": "electron-builder --win",
+    "build:portable": "electron-builder --win portable",
+    "build:mac": "electron-builder --mac dmg",
+    "build:all": "electron-builder -mw"
+  },
+  "build": {
+    "appId": "com.appmyq.media",
+    "productName": "App MyQ",
+    "copyright": "Copyright © 2026 App MyQ",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "server.js",
+      "src/**/*",
+      "public/**/*",
+      "build/icon.ico",
+      "package.json"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/sharp/**/*",
+      "**/node_modules/@img/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "build/icon.png",
+      "category": "public.app-category.graphics-design",
+      "identity": null
+    },
+    "dmg": {
+      "title": "App MyQ",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "App MyQ",
+      "uninstallDisplayName": "App MyQ",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeader": "build/installerHeader.bmp",
+      "installerHeaderIcon": "build/icon.ico",
+      "installerSidebar": "build/installerSidebar.bmp",
+      "uninstallerSidebar": "build/installerSidebar.bmp",
+      "include": "build/installer.nsh",
+      "differentialPackage": false
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "jszip": "^3.10.1",
+    "multer": "^2.3.0",
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.35.4"
+  },
+  "devDependencies": {
+    "electron": "^44.1.1",
+    "electron-builder": "^26.15.3"
+  }
+}

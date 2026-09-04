@@ -1,0 +1,74 @@
+name: Build App MyQ (macOS DMG & Windows EXE)
+
+on:
+  workflow_dispatch: # Memungkinkan tombol "Run workflow" manual di tab Actions GitHub
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+
+jobs:
+  # ====================================================
+  # JOB 1: KOMPILASI MACOS (.DMG)
+  # Dijalankan langsung di mesin virtual Mac resmi GitHub
+  # ====================================================
+  build-macos:
+    name: Build macOS DMG
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build macOS DMG Package
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+        run: npm run build:mac
+
+      - name: Upload macOS DMG Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: App-MyQ-macOS-DMG
+          path: dist/*.dmg
+          if-no-files-found: error
+
+  # ====================================================
+  # JOB 2: KOMPILASI WINDOWS (.EXE)
+  # ====================================================
+  build-windows:
+    name: Build Windows EXE
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Windows Setup Installer
+        run: npm run build:exe
+
+      - name: Upload Windows EXE Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: App-MyQ-Windows-EXE
+          path: dist/*.exe
+          if-no-files-found: error

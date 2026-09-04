@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/win-unpacked/
+
+# Temporary user downloads
+public/downloads/
+
+# Logs and system files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+.env
